@@ -1,0 +1,57 @@
+
+<div class="text-center">
+    <h1 class="h4 text-gray-900 mb-4">Deploy API</h1>
+  </div>
+<div class="col-lg-7">
+  <form [formGroup]="myFormGroup" (ngSubmit)="onSubmit()">
+    <!--div *ngFor="let form_elem of formTemplate">
+    <div [ngSwitch]="form_elem.type">
+      <div class="form-group" *ngSwitchCase="'textBox'">
+        <label for="form_elem.label">{{form_elem.label}}</label>
+        <input class="form-control" formControlName="{{form_elem.label}}" type="text"/>
+      </div>
+      <div *ngSwitchCase="'number'">
+        <label for="form_elem.label">{{form_elem.label}}</label>
+        <input class="form-control" type="number" formControlName="{{form_elem.label}}"/>
+      </div>
+      <div *ngSwitchCase="'select'">
+          <label for="form_elem.label">{{form_elem.label}}</label>
+        <select class="form-control" formControlName="{{form_elem.label}}">
+          <option *ngFor="let opt of form_elem.options">
+            {{opt}}
+          </option>
+        </select>
+      </div>
+    </div>  
+    </div-->
+    <div class="form-group">
+      <label for="apiName">API Name</label>
+      <input class="form-control form-control-user" formControlName="apiName" type="text"/>
+    </div>
+    <div class="form-group">
+      <label for="apiContext">API Context</label>
+      <input class="form-control" formControlName="apiContext" type="text"/>
+    </div>
+    <div class="form-group">
+        <label for="endpointType">Endpoint Type</label>
+        <select class="form-control" formControlName="endpointType">
+            <option></option>
+            <option>HTTP</option>
+            <option>HTTPS</option>
+          </select>
+      </div>
+      <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" formControlName="secured">
+          <label class="form-check-label" for="secured">Secured</label>
+      </div>
+      <div class="form-group">
+          <label for="swaggerEndpoint">Swagger Endpoint</label>
+          <input class="form-control" formControlName="swaggerEndpoint" type="text"/>
+      </div>
+      
+      <div class="form-group">
+          <button type="submit" class="btn btn-success btn-user btn-block" >Deploy</button>
+      </div>
+    
+  </form>
+</div>

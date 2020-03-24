@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { filter } from 'minimatch';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,27 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'capi-ui';
+
+  constructor(){
+    
+    
+    
+  }
+  
+  
+
+  
+  /*login(){
+    this.oauthService.initImplicitFlow();
+  }*/
+  
+  /*logout(){
+    this.oauthService.logOut();
+  }*/
+
+
+
+
 }
+
+
