@@ -26,6 +26,8 @@
     "keycloak-js": "^9.0.0",
     "rxjs": "~6.4.0",
     "startbootstrap-sb-admin-2": "^4.0.7",
+    "swagger-ui": "^3.25.0",
+    "swagger-ui-dist": "^3.25.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },

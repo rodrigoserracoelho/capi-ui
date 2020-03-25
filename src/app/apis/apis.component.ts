@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ApiService } from './api.service';
+import { SwaggerUIBundle, HideTopbarPlugin } from "swagger-ui-dist";
 
 @Component({
   selector: 'app-apis',
@@ -7,56 +9,79 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
   styleUrls: ['./apis.component.css']
 })
 export class ApisComponent implements OnInit {
-  
-  myFormGroup:FormGroup;
-  formTemplate = [
-    {
-      "type":"textBox",
-      "label":"API Name"
-    },
-    {
-      "type":"textBox",
-      "label":"API Context"
-    },
-    {
-      "type":"number",
-      "label":"Age"
-    },
-    {
-      "type":"select",
-      "label":"Endpoint Type",
-      "options":["", "HTTP","HTTPS"]
-    
-    }
-  ];
-  
-  constructor(private formBuilder: FormBuilder) { 
-      console.log("HOME...............................................");
-  }
+
+  showThrottlingPolicies: boolean = false;
+  showBlockIfInError: boolean = false;
+  showSwaggerDefinition: boolean = false;
+  swaggerEndpointToLoad: string;
+  apiFormGroup: FormGroup;
+
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService) { }
 
   ngOnInit() {
-    this.myFormGroup = this.formBuilder.group({
+    this.apiFormGroup = this.formBuilder.group({
       apiName: [null, [Validators.required]],
       apiContext: [null, [Validators.required]],
       endpointType: [null, [Validators.required]],
       secured: [null, [Validators.required]],
-      swaggerEndpoint: [null, [Validators.required]]
-
+      swaggerEndpoint: [null, [Validators.required]],
+      throttlingPolicies: [null, [Validators.required]],
+      maxCallsAllowed: [null],
+      applyPerPath: [null],
+      periodForMaxCalls: [null],
+      blockIfInError: [null],
+      maxAllowedFailedCalls: [null],
+      unblockAfter: [null],
+      unblockAfterMinutes: [null]
     });
-
-
-    /*let group={}    
-    this.formTemplate.forEach(input_template=> {
-    
-      group[input_template.label] = new FormControl('', [Validators.required]);
-    })
-    console.log(group);
-    this.myFormGroup = new FormGroup(group);*/
+    this.onChanges();
   }
 
-  onSubmit(){
-    console.log('SUB---------------------------');
-    console.log(this.myFormGroup.value);
+  onChanges(): void {
+    this.apiFormGroup.valueChanges.subscribe(val => {
+
+      if (val.throttlingPolicies) {
+        this.showThrottlingPolicies = true;
+      } else {
+        this.showThrottlingPolicies = false;
+      }
+
+      if (val.blockIfInError) {
+        this.showBlockIfInError = true;
+      } else {
+        this.showBlockIfInError = false;
+      }
+
+      if (val.swaggerEndpoint != null) {
+        this.swaggerEndpointToLoad = val.swaggerEndpoint;
+      }
+    });
+  }
+
+  previewSwagger(): void {
+    this.showSwaggerDefinition = true;
+    const ui = SwaggerUIBundle({
+      url: this.swaggerEndpointToLoad,
+      dom_id: '#swagger-ui',
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIBundle.SwaggerUIStandalonePreset
+      ],
+      plugins: [
+        HideTopbarPlugin
+      ]
+    });
+
+  }
+
+  onSubmit() {
+    this.apiService.getApis()
+      .subscribe(data => {
+        console.log(data);
+      });
+
+
+    console.log(this.apiFormGroup.value);
   }
 
 }
