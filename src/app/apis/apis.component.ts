@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Component, OnInit, InjectionToken } from '@angular/core';
+import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { ApiService } from './api.service';
 import { SwaggerUIBundle, HideTopbarPlugin } from "swagger-ui-dist";
 
@@ -8,22 +8,41 @@ import { SwaggerUIBundle, HideTopbarPlugin } from "swagger-ui-dist";
   templateUrl: './apis.component.html',
   styleUrls: ['./apis.component.css']
 })
-export class ApisComponent implements OnInit {
+
+export class ApisComponent implements OnInit { 
+
+  control: FormControl;
+  customErrors = {required: 'Please accept the terms'}
 
   showThrottlingPolicies: boolean = false;
   showBlockIfInError: boolean = false;
   showSwaggerDefinition: boolean = false;
   swaggerEndpointToLoad: string;
+
   apiFormGroup: FormGroup;
+
+  //validApiName: boolean = false;
+  //validApiContext: boolean = false;
+  //validSwaggerEndpoint: boolean = false;
+  //validEndpointType: boolean = false;
+
+  activeIdString: string ="1";
+
+  overviewApiName: string;
+  overviewApiContext: string;
+  overviewEndpointType: boolean;
+  overviewSecured: boolean;
+  overviewSwaggerEndpoint: string;l
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) { }
 
   ngOnInit() {
+    this.control = this.formBuilder.control('', Validators.required);
     this.apiFormGroup = this.formBuilder.group({
-      apiName: [null, [Validators.required]],
-      apiContext: [null, [Validators.required]],
+      apiName: [null, [Validators.required, Validators.minLength(3)]],
+      apiContext: [null, [Validators.required, Validators.minLength(3)]],
       endpointType: [null, [Validators.required]],
-      secured: [null, [Validators.required]],
+      secured: [null],
       swaggerEndpoint: [null, [Validators.required]],
       throttlingPolicies: [null, [Validators.required]],
       maxCallsAllowed: [null],
@@ -32,9 +51,36 @@ export class ApisComponent implements OnInit {
       blockIfInError: [null],
       maxAllowedFailedCalls: [null],
       unblockAfter: [null],
-      unblockAfterMinutes: [null]
+      unblockAfterMinutes: [null],
+      endpoints: this.formBuilder.array([
+        this.formBuilder.control('')
+      ])
     });
+
     this.onChanges();
+  }
+
+  switchNgBTab(id: string) {
+    this.activeIdString = id;
+  }
+
+  onEnter() {
+    this.addEndpoint();
+  }
+
+  private addEndpoint() {
+    this.endpoints.push(this.formBuilder.control(''));
+  }
+
+  get endpoints() {
+    return this.apiFormGroup.get('endpoints') as FormArray;
+  }
+
+  removeEndpoint(i: number) {
+    let localArray = this.apiFormGroup.get('endpoints') as FormArray;
+    if(localArray.length > 1) {
+      this.endpoints.removeAt(i);
+    } 
   }
 
   onChanges(): void {
@@ -54,7 +100,35 @@ export class ApisComponent implements OnInit {
 
       if (val.swaggerEndpoint != null) {
         this.swaggerEndpointToLoad = val.swaggerEndpoint;
+        this.overviewSwaggerEndpoint = val.swaggerEndpoint;
+        //this.validSwaggerEndpoint = true;
       }
+
+      if(val.apiName != null && val.apiName.length > 3) {
+        this.overviewApiName = val.apiName;
+        //this.validApiName = true;
+      }
+
+      if(val.apiContext != null && val.apiContext.length > 4) {
+        this.overviewApiContext = val.apiContext;
+        //this.validApiContext = true;
+      }
+
+      if(val.endpointType != null) {
+        //this.validEndpointType
+        this.overviewEndpointType = val.endpointType;
+      }
+
+      if(val.secured != null) {
+        //this.validEndpointType
+        this.overviewSecured = val.secured;
+      }
+
+
+      
+
+            
+
     });
   }
 

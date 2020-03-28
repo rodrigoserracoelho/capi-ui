@@ -10,13 +10,22 @@ import { initializer } from './sso.config';
 import { ApisComponent } from './apis/apis.component';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ControlErrorsDirective } from './control-error/control-errors.directive';
+import { ControlErrorComponent } from './control-error/control-error.component';
+import { ControlErrorContainerDirective } from './control-error/control-error-container.directive';
+import { FormSubmitDirective } from './form-submit.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ApisComponent
+    ApisComponent,
+    ControlErrorsDirective, 
+    ControlErrorComponent, 
+    ControlErrorContainerDirective, 
+    FormSubmitDirective
   ],
   imports: [
     BrowserModule,
@@ -25,7 +34,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     KeycloakAngularModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule
+ 
     
   ],
   providers: [
@@ -36,6 +47,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       deps: [KeycloakService]
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ControlErrorComponent]
 })
 export class AppModule { }
