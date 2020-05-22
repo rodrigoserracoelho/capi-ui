@@ -5,13 +5,13 @@
       <ngb-tab title="Basic Info" id="1">
         <ng-template ngbTabContent>
           <div class="form-group" style="margin-top: 10px;">
-            <label for="apiName">API Name</label>
-            <input class="form-control form-control-user" formControlName="apiName" type="text"
+            <label for="name">API Name</label>
+            <input class="form-control form-control-user" formControlName="name" type="text"
               placeholder="your unique api name..." />
           </div>
           <div class="form-group">
-            <label for="apiContext">API Context</label>
-            <input class="form-control" formControlName="apiContext" type="text"
+            <label for="context">API Context</label>
+            <input class="form-control" formControlName="context" type="text"
               placeholder="/your/unique/context..." />
           </div>
           <div class="form-group">
@@ -36,11 +36,10 @@
       <ngb-tab title="Swagger Info" id="2">
         <ng-template ngbTabContent>
           <div class="input-group" style="margin-bottom: 1rem; margin-top: 1rem;">
-            <input type="text" class="form-control" placeholder="http://your swagger endpoint..." aria-label="Search"
-              aria-describedby="basic-addon2" formControlName="swaggerEndpoint">
+            <input type="text" class="form-control" placeholder="http://your swagger endpoint..." aria-label="Search" aria-describedby="basic-addon2" formControlName="swaggerEndpoint">
             <div class="input-group-append">
               <button class="btn btn-primary" type="button">
-                <i class="fas fa-search fa-sm" (click)="previewSwagger()">Preview</i>
+                <i class="fa fa-search" (click)="previewSwagger()">Preview</i>
               </button>
             </div>
           </div>
@@ -65,7 +64,7 @@
             <div formArrayName="endpoints">
               <div class="input-group" *ngFor="let endpoint of endpoints.controls; let i=index"
                 style="margin-bottom: 1em;">
-                <input class="form-control" placeholder="Endpoint: https://...." aria-label="Remove"
+                <input class="form-control" placeholder="Endpoint: host without http..." aria-label="Remove"
                   aria-describedby="basic-addon2" type="text" [formControlName]="i" [name]="'input' + i"
                   [id]="'input' + i" />
                 <div class="input-group-append">
@@ -86,7 +85,38 @@
           </div>
         </ng-template>
       </ngb-tab>
-      <ngb-tab title="Throttling Settings" id="4">
+      <ngb-tab title="CORS Configuration" id="4">
+        <ng-template ngbTabContent>
+          <div class="form-group form-check" style="margin-top: 1rem;">
+              <input type="checkbox" class="form-check-input" formControlName="corsConfiguration">
+              <label class="form-check-label" for="corsConfiguration">Enable CORS</label>
+          </div>
+          <div class="form-group" *ngIf="showCorsConfiguration">
+            <div formArrayName="origins">
+              <div class="input-group" *ngFor="let origin of origins.controls; let i=index"
+                style="margin-bottom: 1em;">
+                <input class="form-control" placeholder="Origin: host without http..." aria-label="Remove"
+                  aria-describedby="basic-addon2" type="text" [formControlName]="i" [name]="'input' + i"
+                  [id]="'input' + i" />
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search fa-sm" (click)="addOrigin()">Add</i>
+                  </button>
+                  <button class="btn btn-danger" type="button">
+                    <i class="fas fa-search fa-sm" (click)="removeOrigin(i)">Remove</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary" type="button">
+              <i class="fas fa-search fa-sm" (click)="switchNgBTab('5')">Next</i>
+            </button>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Throttling Settings" id="5">
         <ng-template ngbTabContent>
           <div class="form-group form-check" style="margin-top: 1rem;">
             <input type="checkbox" class="form-check-input" formControlName="throttlingPolicies">
@@ -111,12 +141,12 @@
           </div>
           <div class="form-group">
             <button class="btn btn-primary" type="button">
-              <i class="fas fa-search fa-sm" (click)="switchNgBTab('5')">Next</i>
+              <i class="fas fa-search fa-sm" (click)="switchNgBTab('6')">Next</i>
             </button>
           </div>
         </ng-template>
       </ngb-tab>
-      <ngb-tab title="Error Handling Settings" id="5">
+      <ngb-tab title="Error Handling Settings" id="6">
         <ng-template ngbTabContent>
           <div class="form-group form-check" style="margin-top: 1rem;">
             <input type="checkbox" class="form-check-input" formControlName="blockIfInError">
@@ -141,12 +171,12 @@
           </div>
           <div class="form-group">
             <button class="btn btn-primary" type="button">
-              <i class="fas fa-search fa-sm" (click)="switchNgBTab('6')">Next</i>
+              <i class="fas fa-search fa-sm" (click)="switchNgBTab('7')">Next</i>
             </button>
           </div>
         </ng-template>
       </ngb-tab>
-      <ngb-tab title="Overview" id="6">
+      <ngb-tab title="Overview" id="7">
         <ng-template ngbTabContent style="margin-bottom: 1rem; margin-top: 1rem;">
           <table class="table">
             <thead>
@@ -186,6 +216,18 @@
             <tbody>
               <tr *ngFor="let endpoint of endpoints.controls; let i=index">
                 <td>{{endpoint.value}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">CORS Configuration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let origin of origins.controls; let i=index">
+                <td>{{origin.value}}</td>
               </tr>
             </tbody>
           </table>

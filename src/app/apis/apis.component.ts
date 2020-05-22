@@ -15,16 +15,12 @@ export class ApisComponent implements OnInit {
   customErrors = {required: 'Please accept the terms'}
 
   showThrottlingPolicies: boolean = false;
+  showCorsConfiguration: boolean = false;
   showBlockIfInError: boolean = false;
   showSwaggerDefinition: boolean = false;
   swaggerEndpointToLoad: string;
 
   apiFormGroup: FormGroup;
-
-  //validApiName: boolean = false;
-  //validApiContext: boolean = false;
-  //validSwaggerEndpoint: boolean = false;
-  //validEndpointType: boolean = false;
 
   activeIdString: string ="1";
 
@@ -39,12 +35,13 @@ export class ApisComponent implements OnInit {
   ngOnInit() {
     this.control = this.formBuilder.control('', Validators.required);
     this.apiFormGroup = this.formBuilder.group({
-      apiName: [null, [Validators.required, Validators.minLength(3)]],
-      apiContext: [null, [Validators.required, Validators.minLength(3)]],
+      name: [null, [Validators.required, Validators.minLength(3)]],
+      context: [null, [Validators.required, Validators.minLength(3)]],
       endpointType: [null, [Validators.required]],
       secured: [null],
       swaggerEndpoint: [null, [Validators.required]],
       throttlingPolicies: [null, [Validators.required]],
+      corsConfiguration: [null, [Validators.required]],
       maxCallsAllowed: [null],
       applyPerPath: [null],
       periodForMaxCalls: [null],
@@ -54,10 +51,18 @@ export class ApisComponent implements OnInit {
       unblockAfterMinutes: [null],
       endpoints: this.formBuilder.array([
         this.formBuilder.control('')
+      ]),
+      origins: this.formBuilder.array([
+        this.formBuilder.control('')
       ])
     });
 
     this.onChanges();
+
+    /*this.apiService.getApis()
+      .subscribe(data => {
+        console.log(data);
+      });*/
   }
 
   switchNgBTab(id: string) {
@@ -72,8 +77,16 @@ export class ApisComponent implements OnInit {
     this.endpoints.push(this.formBuilder.control(''));
   }
 
+  private addOrigin() {
+    this.origins.push(this.formBuilder.control(''));
+  }
+
   get endpoints() {
     return this.apiFormGroup.get('endpoints') as FormArray;
+  }
+
+  get origins() {
+    return this.apiFormGroup.get('origins') as FormArray;
   }
 
   removeEndpoint(i: number) {
@@ -83,13 +96,27 @@ export class ApisComponent implements OnInit {
     } 
   }
 
+  removeOrigin(i: number) {
+    let localArray = this.apiFormGroup.get('origins') as FormArray;
+    if(localArray.length > 1) {
+      this.origins.removeAt(i);
+    } 
+  }
+
   onChanges(): void {
+
     this.apiFormGroup.valueChanges.subscribe(val => {
 
       if (val.throttlingPolicies) {
         this.showThrottlingPolicies = true;
       } else {
         this.showThrottlingPolicies = false;
+      }
+
+      if (val.corsConfiguration) {
+        this.showCorsConfiguration = true;
+      } else {
+        this.showCorsConfiguration = false;
       }
 
       if (val.blockIfInError) {
@@ -101,34 +128,23 @@ export class ApisComponent implements OnInit {
       if (val.swaggerEndpoint != null) {
         this.swaggerEndpointToLoad = val.swaggerEndpoint;
         this.overviewSwaggerEndpoint = val.swaggerEndpoint;
-        //this.validSwaggerEndpoint = true;
       }
 
-      if(val.apiName != null && val.apiName.length > 3) {
-        this.overviewApiName = val.apiName;
-        //this.validApiName = true;
+      if(val.name != null && val.name.length > 3) {
+        this.overviewApiName = val.name;
       }
 
-      if(val.apiContext != null && val.apiContext.length > 4) {
-        this.overviewApiContext = val.apiContext;
-        //this.validApiContext = true;
+      if(val.context != null && val.context.length > 4) {
+        this.overviewApiContext = val.context;
       }
 
       if(val.endpointType != null) {
-        //this.validEndpointType
         this.overviewEndpointType = val.endpointType;
       }
 
       if(val.secured != null) {
-        //this.validEndpointType
         this.overviewSecured = val.secured;
       }
-
-
-      
-
-            
-
     });
   }
 
@@ -145,17 +161,21 @@ export class ApisComponent implements OnInit {
         HideTopbarPlugin
       ]
     });
-
   }
 
   onSubmit() {
-    this.apiService.getApis()
+    if(this.apiFormGroup.value.secured == null) {
+      this.apiFormGroup.value.secured = false;
+    }
+    if(this.apiFormGroup.value.blockIfInError == null) {
+      this.apiFormGroup.value.blockIfInError = false;
+    }
+    if(this.apiFormGroup.value.throttlingPolicies == null) {
+      this.apiFormGroup.removeControl("throttlingPolicies");
+    }
+    this.apiService.postApi(this.apiFormGroup.value)
       .subscribe(data => {
         console.log(data);
       });
-
-
-    console.log(this.apiFormGroup.value);
   }
-
 }

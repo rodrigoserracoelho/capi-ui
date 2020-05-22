@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { filter } from 'minimatch';
+import { KeycloakService } from 'keycloak-angular';
 
 
 @Component({
@@ -10,8 +11,16 @@ import { filter } from 'minimatch';
 export class AppComponent {
   title = 'capi-ui';
 
-  constructor(){
-    
+  userProfile: any;
+  username: String;
+  
+  constructor(private keycloak: KeycloakService){
+    this.keycloak.loadUserProfile().then(user => {
+      console.log(user);
+      this.userProfile = user;
+      this.username = this.userProfile["username"];
+      console.log(this.username);
+    })
     
     
   }

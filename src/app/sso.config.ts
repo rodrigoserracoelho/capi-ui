@@ -5,9 +5,10 @@ export function initializer(keycloak: KeycloakService): () => Promise<any> {
   return (): Promise<any> => {
     return new Promise(async (resolve, reject) => {
       let keycloakConfig: KeycloakConfig = {
-        url: 'http://localhost:8081/auth',
-        realm: 'master',
-        clientId: 'capi-rest'
+        //url: 'https://capigateway.eu:8443/auth',
+        url: 'https://keycloak:8443/auth',
+        realm: 'capi',
+        clientId: 'rest'
       };
       try {
         await keycloak.init({

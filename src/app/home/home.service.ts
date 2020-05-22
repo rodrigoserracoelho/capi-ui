@@ -1,12 +1,15 @@
 import {catchError, retry} from 'rxjs/internal/operators';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 //const localUrl = 'assets/data/smartphone.json';
 //const apiUrl = 'https://localhost:8080/route';
 //const apiUrl = "https://capigateway.eu:8380/gateway/test6/external/rodrigo";
 const apiUrl = "https://localhost:8380/gateway/test6/external/rodrigo";
+
+const camelRouteEndpoint = "https://localhost:8380/analytics/health";
+const camelDeployedRoutes = "https://localhost:8380/analytics/camelroutes";
 /*const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
@@ -17,14 +20,18 @@ const apiUrl = "https://localhost:8380/gateway/test6/external/rodrigo";
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class HomeService {
 
   constructor(private http: HttpClient) { }
 
-  getApis(): Observable<any> {
-      console.log("CALLING API");
-    return this.http.get<any[]>(apiUrl).pipe(
-      catchError(this.handleError<any[]>('getApis')));
+  getCamelRouteServerStatus(): Observable<any> {
+    return this.http.get<any[]>(camelRouteEndpoint).pipe(
+      catchError(this.handleError<any[]>('getCamelRouteServerStatus')));
+  }
+
+  getCamelDeployedRoutes(): Observable<any> {
+    return this.http.get<any[]>(camelDeployedRoutes).pipe(
+      catchError(this.handleError<any[]>('getCamelDeployedRoutes')));
   }
 
   postApi(api: any): Observable<any> {
