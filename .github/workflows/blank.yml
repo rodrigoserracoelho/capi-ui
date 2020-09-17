@@ -26,4 +26,4 @@ jobs:
           dockerfile: Dockerfile
           username: surisoft
           password: ${{ secrets.DOCKER_SECRET }}
-          registry: https://index.docker.io/v1/
+          registry: https://index.docker.io/v1
