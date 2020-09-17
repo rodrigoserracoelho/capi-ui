@@ -30,6 +30,6 @@ jobs:
       - name: Login to DockerHub Registry
         run: echo ${{ secrets.DOCKER_SECRET }} | docker login -u surisoft --password-stdin
       - name: Build the tagged Docker image
-        run: docker build . --file Dockerfile --tag surisoft/capi-ui:latest
+        run: docker build . --file Dockerfile --tag surisoft/capi-ui:${{fromJson(steps.set_var.outputs.packageJson).version}}
       - name: Push the tagged Docker image
-        run: docker push surisoft/capi-ui:latest
+        run: docker push surisoft/capi-ui:${{fromJson(steps.set_var.outputs.packageJson).version}}
