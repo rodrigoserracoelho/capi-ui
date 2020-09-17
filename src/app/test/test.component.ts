@@ -24,7 +24,7 @@ export class TestComponent implements OnInit {
     this.control = this.formBuilder.control('', Validators.required);
     
     this.testFormGroup = this.formBuilder.group({
-      apiEndpoint: [null, [Validators.pattern(urlRegex), Validators.pattern(urlRegex)]]
+      apiEndpoint: [null, [Validators.required]]
     });
   }
 
