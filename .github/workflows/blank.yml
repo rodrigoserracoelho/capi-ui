@@ -23,7 +23,6 @@ jobs:
         name: Build & push Docker image
         with:
           image: surisoft/capi-ui:latest
-          dockerfile: Dockerfile
           username: surisoft
           password: ${{ secrets.DOCKER_SECRET }}
           registry: https://index.docker.io/v1
