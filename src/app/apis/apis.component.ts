@@ -75,11 +75,11 @@ export class ApisComponent implements OnInit {
     this.addEndpoint();
   }
 
-  private addEndpoint() {
+  addEndpoint() {
     this.endpoints.push(this.formBuilder.control(''));
   }
 
-  private addOrigin() {
+  addOrigin() {
     this.origins.push(this.formBuilder.control(''));
   }
 

@@ -10,12 +10,12 @@ import { FormGroup, FormBuilder, Validators, FormControl, ValidationErrors } fro
 
 export class TestComponent implements OnInit { 
 
-  private result: String;
-  private errorResult: String;
-  private callWithError: boolean;
+  result: String;
+  errorResult: String;
+  callWithError: boolean;
 
-  private testFormGroup: FormGroup;
-  private control: FormControl;
+  testFormGroup: FormGroup;
+  control: FormControl;
 
   constructor(private formBuilder: FormBuilder, private testService: TestService) { }
 
