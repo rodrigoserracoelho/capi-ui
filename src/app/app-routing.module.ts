@@ -6,6 +6,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AppAuthGuard } from './app.authguard';
 import { ApisComponent } from './apis/apis.component';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,13 @@ const routes: Routes = [
   },
   {
     path: 'apis',
-    component: ApisComponent
+    component: ApisComponent,
+    canActivate: [AppAuthGuard]
+  },
+  {
+    path: 'test',
+    component: TestComponent,
+    canActivate: [AppAuthGuard]
   }
 ];
 

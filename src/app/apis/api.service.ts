@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
 //const localUrl = 'assets/data/smartphone.json';
 //const apiUrl = 'https://localhost:8080/route';
 //const apiUrl = "https://capigateway.eu:8380/gateway/test6/external/rodrigo";
-const apiUrl = "https://localhost:8380/gateway/test6/external/rodrigo";
+const apiUrl = "https://localhost:8380/gateway/api-license/licenses";
 /*const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
@@ -22,7 +22,6 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getApis(): Observable<any> {
-      console.log("CALLING API");
     return this.http.get<any[]>(apiUrl).pipe(
       catchError(this.handleError<any[]>('getApis')));
   }

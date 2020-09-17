@@ -55,14 +55,16 @@ export class ApisComponent implements OnInit {
       origins: this.formBuilder.array([
         this.formBuilder.control('')
       ])
+
+      
     });
 
     this.onChanges();
 
-    /*this.apiService.getApis()
+    this.apiService.getApis()
       .subscribe(data => {
         console.log(data);
-      });*/
+      });
   }
 
   switchNgBTab(id: string) {

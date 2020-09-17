@@ -15,6 +15,7 @@ import { ControlErrorsDirective } from './control-error/control-errors.directive
 import { ControlErrorComponent } from './control-error/control-error.component';
 import { ControlErrorContainerDirective } from './control-error/control-error-container.directive';
 import { FormSubmitDirective } from './form-submit.directive';
+import { TestComponent } from './test/test.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { FormSubmitDirective } from './form-submit.directive';
     AppComponent,
     HomeComponent,
     ApisComponent,
+    TestComponent,
     ControlErrorsDirective, 
     ControlErrorComponent, 
     ControlErrorContainerDirective, 
