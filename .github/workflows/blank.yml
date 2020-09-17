@@ -22,7 +22,7 @@ jobs:
       - uses: docker/build-push-action@v1.1.1
         name: Build & push Docker image
         with:
-          image: surisoft/capi-ui
+          repository: surisoft/capi-ui
           tag: latest
           dockerfile: Dockerfile
           username: surisoft
