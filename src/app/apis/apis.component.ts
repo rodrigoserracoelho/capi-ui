@@ -61,10 +61,10 @@ export class ApisComponent implements OnInit {
 
     this.onChanges();
 
-    this.apiService.getApis()
+    /*this.apiService.getApis()
       .subscribe(data => {
         console.log(data);
-      });
+      });*/
   }
 
   switchNgBTab(id: string) {

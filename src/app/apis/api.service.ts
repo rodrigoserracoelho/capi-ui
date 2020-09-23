@@ -3,10 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
-//const localUrl = 'assets/data/smartphone.json';
-//const apiUrl = 'https://localhost:8080/route';
-//const apiUrl = "https://capigateway.eu:8380/gateway/test6/external/rodrigo";
-const apiUrl = "https://localhost:8380/gateway/api-license/licenses";
+const apiUrl = 'https://localhost:8080/route';
 /*const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
