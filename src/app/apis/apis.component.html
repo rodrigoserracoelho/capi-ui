@@ -12,7 +12,7 @@
           <div class="form-group">
             <label for="context">API Context</label>
             <input class="form-control" formControlName="context" type="text"
-              placeholder="/your/unique/context..." />
+              placeholder="your/unique/context..." />
           </div>
           <div class="form-group">
             <label for="endpointType">Endpoint Type</label>
@@ -27,8 +27,8 @@
             <label class="form-check-label" for="secured">Secured</label>
           </div>
           <div class="form-group">
-            <button class="btn btn-primary" type="button" style="float: right;">
-              <i class="fas fa-search fa-sm" (click)="switchNgBTab('2')">Next</i>
+            <button class="btn btn-primary" type="button" style="float: right;" >
+              <i (click)="switchNgBTab('2')">Next</i>
             </button>
           </div>
         </ng-template>
@@ -39,7 +39,7 @@
             <input type="text" class="form-control" placeholder="http://your swagger endpoint..." aria-label="Search" aria-describedby="basic-addon2" formControlName="swaggerEndpoint">
             <div class="input-group-append">
               <button class="btn btn-primary" type="button">
-                <i class="fa fa-search" (click)="previewSwagger()">Preview</i>
+                <i (click)="previewSwagger()">Preview</i>
               </button>
             </div>
           </div>
@@ -53,7 +53,7 @@
           </div>
           <div class="form-group">
             <button class="btn btn-primary" type="button">
-              <i class="fas fa-search fa-sm" (click)="switchNgBTab('3')">Next</i>
+              <i (click)="switchNgBTab('3')">Next</i>
             </button>
           </div>
         </ng-template>
@@ -69,10 +69,10 @@
                   [id]="'input' + i" />
                 <div class="input-group-append">
                   <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search fa-sm" (click)="onEnter()">Add</i>
+                    <i (click)="onEnter()">Add</i>
                   </button>
                   <button class="btn btn-danger" type="button">
-                    <i class="fas fa-search fa-sm" (click)="removeEndpoint(i)">Remove</i>
+                    <i (click)="removeEndpoint(i)">Remove</i>
                   </button>
                 </div>
               </div>
@@ -80,7 +80,7 @@
           </div>
           <div class="form-group">
             <button class="btn btn-primary" type="button">
-              <i class="fas fa-search fa-sm" (click)="switchNgBTab('4')">Next</i>
+              <i (click)="switchNgBTab('4')">Next</i>
             </button>
           </div>
         </ng-template>
@@ -100,10 +100,10 @@
                   [id]="'input' + i" />
                 <div class="input-group-append">
                   <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search fa-sm" (click)="addOrigin()">Add</i>
+                    <i (click)="addOrigin()">Add</i>
                   </button>
                   <button class="btn btn-danger" type="button">
-                    <i class="fas fa-search fa-sm" (click)="removeOrigin(i)">Remove</i>
+                    <i (click)="removeOrigin(i)">Remove</i>
                   </button>
                 </div>
               </div>
@@ -111,7 +111,7 @@
           </div>
           <div class="form-group">
             <button class="btn btn-primary" type="button">
-              <i class="fas fa-search fa-sm" (click)="switchNgBTab('5')">Next</i>
+              <i (click)="switchNgBTab('5')">Next</i>
             </button>
           </div>
         </ng-template>
@@ -141,7 +141,7 @@
           </div>
           <div class="form-group">
             <button class="btn btn-primary" type="button">
-              <i class="fas fa-search fa-sm" (click)="switchNgBTab('6')">Next</i>
+              <i (click)="switchNgBTab('6')">Next</i>
             </button>
           </div>
         </ng-template>
@@ -171,7 +171,7 @@
           </div>
           <div class="form-group">
             <button class="btn btn-primary" type="button">
-              <i class="fas fa-search fa-sm" (click)="switchNgBTab('7')">Next</i>
+              <i (click)="switchNgBTab('7')">Next</i>
             </button>
           </div>
         </ng-template>
