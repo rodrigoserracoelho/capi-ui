@@ -41,7 +41,7 @@ export class ApisComponent implements OnInit {
       secured: [null],
       swaggerEndpoint: [null, [Validators.required]],
       throttlingPolicies: [null, [Validators.required]],
-      corsConfiguration: [null, [Validators.required]],
+      corsEnabled: [null, [Validators.required]],
       maxCallsAllowed: [null],
       applyPerPath: [null],
       periodForMaxCalls: [null],
@@ -115,7 +115,7 @@ export class ApisComponent implements OnInit {
         this.showThrottlingPolicies = false;
       }
 
-      if (val.corsConfiguration) {
+      if (val.corsEnabled) {
         this.showCorsConfiguration = true;
       } else {
         this.showCorsConfiguration = false;

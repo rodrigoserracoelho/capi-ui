@@ -88,8 +88,8 @@
       <ngb-tab title="CORS Configuration" id="4">
         <ng-template ngbTabContent>
           <div class="form-group form-check" style="margin-top: 1rem;">
-              <input type="checkbox" class="form-check-input" formControlName="corsConfiguration">
-              <label class="form-check-label" for="corsConfiguration">Enable CORS</label>
+              <input type="checkbox" class="form-check-input" formControlName="corsEnabled">
+              <label class="form-check-label" for="corsEnabled">Enable CORS</label>
           </div>
           <div class="form-group" *ngIf="showCorsConfiguration">
             <div formArrayName="allowedOrigins">
