@@ -28,7 +28,7 @@ export class ApisComponent implements OnInit {
   overviewApiContext: string;
   overviewEndpointType: boolean;
   overviewSecured: boolean;
-  overviewSwaggerEndpoint: string;l
+  overviewSwaggerEndpoint: string;
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) { }
 
@@ -49,6 +49,7 @@ export class ApisComponent implements OnInit {
       maxAllowedFailedCalls: [null],
       unblockAfter: [null],
       unblockAfterMinutes: [null],
+      clientID: [null],
       endpoints: this.formBuilder.array([
         this.formBuilder.control('')
       ]),
