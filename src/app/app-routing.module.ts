@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { AppAuthGuard } from './app.authguard';
 import { ApisComponent } from './apis/apis.component';
 import { TestComponent } from './test/test.component';
+import { ListApisComponent } from './listapis/listapis.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,11 @@ const routes: Routes = [
   {
     path: 'apis',
     component: ApisComponent,
+    canActivate: [AppAuthGuard]
+  },
+  {
+    path: 'apis/list',
+    component: ListApisComponent,
     canActivate: [AppAuthGuard]
   },
   {

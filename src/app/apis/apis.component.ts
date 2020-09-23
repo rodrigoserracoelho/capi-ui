@@ -2,6 +2,7 @@ import { Component, OnInit, InjectionToken } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { ApiService } from './api.service';
 import { SwaggerUIBundle, HideTopbarPlugin } from "swagger-ui-dist";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-apis',
@@ -31,7 +32,7 @@ export class ApisComponent implements OnInit {
   overviewSwaggerEndpoint: string;
   overviewClientID: string;
 
-  constructor(private formBuilder: FormBuilder, private apiService: ApiService) { }
+  constructor(private formBuilder: FormBuilder, private apiService: ApiService,  private router: Router) { }
 
   ngOnInit() {
     this.control = this.formBuilder.control('', Validators.required);
@@ -184,6 +185,8 @@ export class ApisComponent implements OnInit {
     this.apiService.postApi(this.apiFormGroup.value)
       .subscribe(data => {
         console.log(data);
+        this.router.navigate(['/apis/list']);
+       
       });
   }
 }

@@ -16,13 +16,15 @@ import { ControlErrorComponent } from './control-error/control-error.component';
 import { ControlErrorContainerDirective } from './control-error/control-error-container.directive';
 import { FormSubmitDirective } from './form-submit.directive';
 import { TestComponent } from './test/test.component';
-
+import { ListApisComponent } from './listapis/listapis.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ApisComponent,
+    ListApisComponent,
     TestComponent,
     ControlErrorsDirective, 
     ControlErrorComponent, 
@@ -38,8 +40,9 @@ import { TestComponent } from './test/test.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgbModule
- 
-    
+  ],
+  exports: [
+    MatTableModule
   ],
   providers: [
     {
