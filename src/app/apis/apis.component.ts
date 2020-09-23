@@ -29,6 +29,7 @@ export class ApisComponent implements OnInit {
   overviewEndpointType: boolean;
   overviewSecured: boolean;
   overviewSwaggerEndpoint: string;
+  overviewClientID: string;
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) { }
 
@@ -147,6 +148,10 @@ export class ApisComponent implements OnInit {
 
       if(val.secured != null) {
         this.overviewSecured = val.secured;
+      }
+
+      if(val.clientID != null && val.clientID.length > 4) {
+        this.overviewClientID = val.clientID;
       }
     });
   }

@@ -11,7 +11,7 @@ import { TestComponent } from './test/test.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/apis',
     pathMatch: 'full'
   },
   {
