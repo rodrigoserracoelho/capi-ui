@@ -93,7 +93,7 @@
           </div>
           <div class="form-group" *ngIf="showCorsConfiguration">
             <div formArrayName="origins">
-              <div class="input-group" *ngFor="let origin of origins.controls; let i=index"
+              <div class="input-group" *ngFor="let allowedOrigin of allowedOrigins.controls; let i=index"
                 style="margin-bottom: 1em;">
                 <input class="form-control" placeholder="Origin: host without http..." aria-label="Remove"
                   aria-describedby="basic-addon2" type="text" [formControlName]="i" [name]="'input' + i"
