@@ -52,7 +52,7 @@ export class ApisComponent implements OnInit {
       endpoints: this.formBuilder.array([
         this.formBuilder.control('')
       ]),
-      origins: this.formBuilder.array([
+      allowedOrigins: this.formBuilder.array([
         this.formBuilder.control('')
       ])
 
@@ -80,15 +80,15 @@ export class ApisComponent implements OnInit {
   }
 
   addOrigin() {
-    this.origins.push(this.formBuilder.control(''));
+    this.allowedOrigins.push(this.formBuilder.control(''));
   }
 
   get endpoints() {
     return this.apiFormGroup.get('endpoints') as FormArray;
   }
 
-  get origins() {
-    return this.apiFormGroup.get('origins') as FormArray;
+  get allowedOrigins() {
+    return this.apiFormGroup.get('allowedOrigins') as FormArray;
   }
 
   removeEndpoint(i: number) {
@@ -99,9 +99,9 @@ export class ApisComponent implements OnInit {
   }
 
   removeOrigin(i: number) {
-    let localArray = this.apiFormGroup.get('origins') as FormArray;
+    let localArray = this.apiFormGroup.get('allowedOrigins') as FormArray;
     if(localArray.length > 1) {
-      this.origins.removeAt(i);
+      this.allowedOrigins.removeAt(i);
     } 
   }
 
