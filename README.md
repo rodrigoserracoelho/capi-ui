@@ -8,4 +8,6 @@ Getting list of deployed API's
 
 Test Remote API's
 
+Check CAMEL Routes
+
 Protected by Keycloak
